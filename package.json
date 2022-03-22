@@ -4,7 +4,7 @@
   "description": "GitHub Action to purge Fastly cache.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc && ncc build --source-map --license licenses.txt"
   },
   "repository": {
     "type": "git",
@@ -23,6 +23,8 @@
   "homepage": "https://github.com/Monchi/fastly-purge-action#readme",
   "devDependencies": {
     "@types/node": "^17.0.22",
+    "@typescript-eslint/eslint-plugin": "^5.16.0",
+    "@typescript-eslint/parser": "^5.16.0",
     "@vercel/ncc": "^0.33.3",
     "eslint": "^8.11.0",
     "eslint-plugin-github": "^4.3.6",
