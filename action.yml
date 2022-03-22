@@ -1,0 +1,11 @@
+name: "Fastly Purge"
+description: "GitHub Action to purge Fastly cache."
+author: "Yuku Kotani"
+inputs:
+  api-token:
+    required: true
+    description: "API token of Fastly"
+
+runs:
+  using: "node12"
+  main: "dist/index.js"
