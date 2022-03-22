@@ -5,6 +5,18 @@ inputs:
   api-token:
     required: true
     description: "API token of Fastly"
+  service-id:
+    required: true
+    description: "Service ID to purge"
+  soft:
+    description: "If true, the affected object will be marked as stale rather than making it inaccessible."
+    default: false
+  target:
+    required: true
+    description: "Target to purge. Currently only `surrogate-key` is supported."
+  keys:
+    required: true
+    description: "Surrogate keys to delete. Required if the target is `surrogate-key`."
 
 runs:
   using: "node12"
