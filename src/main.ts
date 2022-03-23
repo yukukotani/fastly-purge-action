@@ -17,11 +17,13 @@ async function run(): Promise<void> {
 
     const purgeApi = new Fastly.PurgeApi();
 
-    await purgeApi.bulkPurgeTag({
+    const response = await purgeApi.bulkPurgeTag({
       service_id: serviceId,
       fastly_soft_purge: soft ? 0 : 1,
       purge_response: { surrogate_keys: keys },
     });
+
+    core.setOutput("response", response);
   } catch (error) {
     if (error instanceof Error) core.setFailed(error.message);
   }
