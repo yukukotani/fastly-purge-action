@@ -1,7 +1,5 @@
 # fastly-purge-action
 
-**Still in development. Don't use in production.**
-
 A GitHub Actions to purge Fastly cache.
 
 ## Usage
