@@ -17,6 +17,9 @@ inputs:
   keys:
     required: true
     description: "Surrogate keys to delete. Required if the target is `surrogate-key`."
+  debug:
+    description: "debug key"
+    default: false
 
 runs:
   using: "node12"

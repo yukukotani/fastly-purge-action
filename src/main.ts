@@ -8,6 +8,7 @@ async function run(): Promise<void> {
     const soft = core.getBooleanInput("soft");
     const target = core.getInput("target", { required: true });
     const keys = core.getMultilineInput("keys", { required: true });
+    const debug = core.getBooleanInput("debug");
 
     if (target !== "surrogate-key") {
       throw new Error("Invalid target: " + target);
@@ -24,6 +25,10 @@ async function run(): Promise<void> {
     });
 
     core.setOutput("response", response);
+
+    if (debug) {
+      console.log("response", response);
+    }
   } catch (error) {
     if (error instanceof Error) core.setFailed(error.message);
   }
