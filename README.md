@@ -6,7 +6,7 @@ A GitHub Actions to purge Fastly cache.
 
 ```yaml
 - name: Purge Fastly cache
-  uses: Monchi/fastly-purge-action@v1
+  uses: yukukotani/fastly-purge-action@v1
   with:
     api-token: YOUR_TOKEN_HERE
     service-id: 4UiI4ODITcAJv2z4ezJTFC
