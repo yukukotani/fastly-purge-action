@@ -20,7 +20,7 @@ async function run(): Promise<void> {
 
     const response = await purgeApi.bulkPurgeTag({
       service_id: serviceId,
-      fastly_soft_purge: soft ? 0 : 1,
+      fastly_soft_purge: soft ? 1 : 0,
       purge_response: { surrogate_keys: keys },
     });
 

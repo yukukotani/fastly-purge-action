@@ -45,4 +45,4 @@ Surrogate Keys to purge.
 
 ### soft
 
-If true, the affected object will be marked as stale rather than making it inaccessible.
+True by default. If false, the affected object will be inaccessible rather than marked as stale.
