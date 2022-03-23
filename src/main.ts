@@ -1,5 +1,5 @@
 import * as core from "@actions/core";
-import Fastly from "fastly";
+import * as Fastly from "fastly";
 
 async function run(): Promise<void> {
   try {
