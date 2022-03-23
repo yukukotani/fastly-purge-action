@@ -27,7 +27,7 @@ async function run(): Promise<void> {
     core.setOutput("response", response);
 
     if (debug) {
-      console.log("response", response);
+      console.log("response", String(response));
     }
   } catch (error) {
     if (error instanceof Error) core.setFailed(error.message);
