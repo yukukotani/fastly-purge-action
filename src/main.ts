@@ -3,7 +3,7 @@ import Fastly from "fastly";
 
 async function run(): Promise<void> {
   try {
-    const apiKey = core.getInput("api-key", { required: true });
+    const apiToken = core.getInput("api-token", { required: true });
     const serviceId = core.getInput("service-id", { required: true });
     const soft = core.getBooleanInput("soft");
     const target = core.getInput("target", { required: true });
@@ -13,7 +13,7 @@ async function run(): Promise<void> {
       throw new Error("Invalid target: " + target);
     }
 
-    Fastly.ApiClient.instance.authenticate(apiKey);
+    Fastly.ApiClient.instance.authenticate(apiToken);
 
     const purgeApi = new Fastly.PurgeApi();
 
