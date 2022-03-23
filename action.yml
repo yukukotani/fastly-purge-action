@@ -1,8 +1,9 @@
 name: "Purge Fastly cache"
 description: "GitHub Actions to purge Fastly cache by surrogate key or URL."
 author: "Yuku Kotani"
-icon: archive
-color: red
+branding:
+  icon: archive
+  color: red
 inputs:
   api-token:
     required: true
