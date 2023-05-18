@@ -9,17 +9,23 @@ inputs:
     required: true
     description: "API token of Fastly"
   service-id:
-    required: true
-    description: "Service ID to purge"
+    required: false
+    description: "Service ID to purge. Required for `surrogate-key` target."
+    default: ""
   soft:
     description: "If false, the affected object will be inaccessible rather than marked as stale."
     default: true
   target:
     required: true
-    description: "Target to purge. Currently only `surrogate-key` is supported."
+    description: "Target to purge. Currently only `surrogate-key` and `cached-url` is supported."
   keys:
-    required: true
+    required: false
     description: "Surrogate keys to delete. Required if the target is `surrogate-key`."
+    default: []
+  cached-url:
+    required: false
+    description: "Cached URL to purge. Required if the target is `cached-url`."
+    default: ""
   debug:
     description: "debug key"
     default: false
