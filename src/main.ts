@@ -1,16 +1,24 @@
 import * as core from "@actions/core";
 import * as Fastly from "fastly";
 
+const ACCEPTED_TARGETS = [
+  "surrogate-key",
+  "single-url",
+];
+
 async function run(): Promise<void> {
   try {
     const apiToken = core.getInput("api-token", { required: true });
-    const serviceId = core.getInput("service-id", { required: true });
-    const soft = core.getBooleanInput("soft");
     const target = core.getInput("target", { required: true });
-    const keys = core.getMultilineInput("keys", { required: true });
+    const soft = core.getBooleanInput("soft");
+
+    const serviceId = core.getInput("service-id", { required: target === "surrogate-key" });
+    const keys = core.getMultilineInput("keys", { required: target === "surrogate-key" });
+    const cachedUrl = core.getInput("cached-url", { required: target === "single-url" });
+
     const debug = core.getBooleanInput("debug");
 
-    if (target !== "surrogate-key") {
+    if (!ACCEPTED_TARGETS.includes(target)) {
       throw new Error("Invalid target: " + target);
     }
 
@@ -18,11 +26,24 @@ async function run(): Promise<void> {
 
     const purgeApi = new Fastly.PurgeApi();
 
-    const response = await purgeApi.bulkPurgeTag({
-      service_id: serviceId,
-      fastly_soft_purge: soft ? 1 : 0,
-      purge_response: { surrogate_keys: keys },
-    });
+    let response: Fastly.PurgeResponse;
+
+    if (target === "surrogate-key") {
+      response = await purgeApi.bulkPurgeTag({
+        service_id: serviceId,
+        fastly_soft_purge: soft ? 1 : 0,
+        purge_response: { surrogate_keys: keys },
+      });
+    } else {
+      if (!cachedUrl) {
+        throw new Error("`\"single-url\"` target must include `cached-url` input");
+      }
+
+      response = await purgeApi.purgeSingleUrl({
+        cached_url: cachedUrl,
+        fastly_soft_purge: soft ? 1 : 0,
+      });
+    }
 
     core.setOutput("response", response);
 
