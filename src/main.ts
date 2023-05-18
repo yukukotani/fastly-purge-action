@@ -14,7 +14,7 @@ async function run(): Promise<void> {
 
     const serviceId = core.getInput("service-id", { required: target === "surrogate-key" });
     const keys = core.getMultilineInput("keys", { required: target === "surrogate-key" });
-    const cachedUrl = core.getInput("cached-url", { required: target === "single-url" });
+    const url = core.getInput("url", { required: target === "single-url" });
 
     const debug = core.getBooleanInput("debug");
 
@@ -35,12 +35,12 @@ async function run(): Promise<void> {
         purge_response: { surrogate_keys: keys },
       });
     } else {
-      if (!cachedUrl) {
-        throw new Error("`\"single-url\"` target must include `cached-url` input");
+      if (!url) {
+        throw new Error("`\"single-url\"` target must include `url` input");
       }
 
       response = await purgeApi.purgeSingleUrl({
-        cached_url: cachedUrl,
+        cached_url: url,
         fastly_soft_purge: soft ? 1 : 0,
       });
     }

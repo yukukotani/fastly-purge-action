@@ -17,14 +17,14 @@ inputs:
     default: true
   target:
     required: true
-    description: "Target to purge. Currently only `surrogate-key` and `cached-url` is supported."
+    description: "Target to purge. Currently only `surrogate-key` and `single-url` are supported."
   keys:
     required: false
     description: "Surrogate keys to delete. Required if the target is `surrogate-key`."
     default: []
-  cached-url:
+  url:
     required: false
-    description: "Cached URL to purge. Required if the target is `cached-url`."
+    description: "Cached URL to purge. Required if the target is `single-url`."
     default: ""
   debug:
     description: "debug key"
