@@ -11,9 +11,20 @@ declare module "fastly" {
         purge_response: object;
       };
 
-  class PurgeApi {
-    bulkPurgeTag(options: BulkPurgeTagOptions): Promise<unknown>;
+  type PurgeSingleUrlOptions = {
+    cached_url: string;
+    fastly_soft_purge: 0 | 1;
   }
+
+  class PurgeApi {
+    bulkPurgeTag(options: BulkPurgeTagOptions): Promise<PurgeResponse>;
+    purgeSingleUrl(options: PurgeSingleUrlOptions): Promise<PurgeResponse>;
+  }
+
+  type PurgeResponse = {
+    status: string;
+    id: string;
+  };
 
   namespace ApiClient {
     namespace instance {
