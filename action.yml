@@ -21,7 +21,7 @@ inputs:
   keys:
     required: false
     description: "Surrogate keys to delete. Required if the target is `surrogate-key`."
-    default: []
+    default: ""
   url:
     required: false
     description: "Cached URL to purge. Required if the target is `single-url`."

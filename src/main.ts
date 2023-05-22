@@ -1,10 +1,7 @@
 import * as core from "@actions/core";
 import * as Fastly from "fastly";
 
-const ACCEPTED_TARGETS = [
-  "surrogate-key",
-  "single-url",
-];
+const ACCEPTED_TARGETS = ["surrogate-key", "single-url"];
 
 async function run(): Promise<void> {
   try {
@@ -13,7 +10,7 @@ async function run(): Promise<void> {
     const soft = core.getBooleanInput("soft");
 
     const serviceId = core.getInput("service-id", { required: target === "surrogate-key" });
-    const keys = core.getMultilineInput("keys", { required: target === "surrogate-key" });
+    const keys = core.getInput("keys", { required: target === "surrogate-key" });
     const url = core.getInput("url", { required: target === "single-url" });
 
     const debug = core.getBooleanInput("debug");
@@ -36,7 +33,7 @@ async function run(): Promise<void> {
       });
     } else {
       if (!url) {
-        throw new Error("`\"single-url\"` target must include `url` input");
+        throw new Error("`single-url` target must include `url` input");
       }
 
       response = await purgeApi.purgeSingleUrl({
