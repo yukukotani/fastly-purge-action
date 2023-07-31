@@ -26,7 +26,7 @@ async function run(): Promise<void> {
     let response: Fastly.PurgeResponse;
 
     if (target === "surrogate-key") {
-      const keyArray = keys.split(",");
+      const keyArray = keys.split(",").map(key => key.trim());
       response = await purgeApi.bulkPurgeTag({
         service_id: serviceId,
         fastly_soft_purge: soft ? 1 : 0,
