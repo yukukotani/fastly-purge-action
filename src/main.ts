@@ -43,7 +43,7 @@ async function run(): Promise<void> {
       });
     }
 
-    console.log("Success to sent purge request: ", response)
+    console.log("Success to sent purge request.")
 
     core.setOutput("response", response);
 
