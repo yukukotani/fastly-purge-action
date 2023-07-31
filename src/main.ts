@@ -42,6 +42,8 @@ async function run(): Promise<void> {
       });
     }
 
+    console.log("Success to sent purge request: ", response)
+
     core.setOutput("response", response);
 
     if (debug) {
@@ -52,7 +54,12 @@ async function run(): Promise<void> {
       }
     }
   } catch (error) {
-    if (error instanceof Error) core.setFailed(error.message);
+    if (error instanceof Error) {
+      core.setFailed(error)
+    } else {
+      console.error(error);
+      core.setFailed("Unknown error")
+    }
   }
 }
 
