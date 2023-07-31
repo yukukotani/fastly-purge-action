@@ -12,7 +12,7 @@ A GitHub Actions to purge Fastly cache.
   with:
     api-token: YOUR_TOKEN_HERE
     service-id: 4UiI4ODITcAJv2z4ezJTFC
-    target: surrogate-key
+    target: surrogate-key,another-key
     keys: landing-pages
     soft: true
 ```
@@ -53,7 +53,7 @@ Your service id to purge caches. **This is not service name. This will be a rand
 
 **Required when the target is `surrogate-key`**
 
-Surrogate Keys to purge.
+Surrogate Keys to purge. If you want to purge multiple keys, separate them with a comma.
 
 ### url
 
